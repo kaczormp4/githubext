@@ -1,10 +1,32 @@
 export function injectStyles() {
-  const style = document.createElement("style");
-  style.textContent = `
+  // Base styles
+  const baseStyles = `
+    :root {
+      /* Theme colors */
+      --primary-color: #ff6b00;
+      --bg-color: #ffffff;
+      --text-color: #24292e;
+      --border-color: #e1e4e8;
+      --shadow-color: rgba(0, 0, 0, 0.1);
+      --hover-color: #f6f8fa;
+    }
+
+    [data-theme="dark"] {
+      --primary-color: #ff6b00;
+      --bg-color: #24292e;
+      --text-color: #ffffff;
+      --border-color: #444d56;
+      --shadow-color: rgba(0, 0, 0, 0.3);
+      --hover-color: #2f363d;
+    }
+
     body {
       margin: 0;
       padding: 0;
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      transition: background-color 0.3s ease, color 0.3s ease;
     }
     
     .custom-ui-panel {
@@ -12,30 +34,103 @@ export function injectStyles() {
       top: 0;
       height: 100vh;
       width: 300px;
-      background: #ffffff;
-      box-shadow: 0 0 15px rgba(255, 165, 0, 0.2);
+      background: var(--bg-color);
+      box-shadow: 0 0 15px var(--shadow-color);
       transition: all 0.3s ease;
       z-index: 1000;
       padding: 20px;
       box-sizing: border-box;
-      border: 2px solid #FFA500;
+      border: 2px solid var(--theme-color);
     }
 
     .custom-ui-panel h3 {
-      color: #FFA500;
+      color: var(--theme-color);
       margin-top: 0;
       padding-bottom: 10px;
-      border-bottom: 2px solid #FFA500;
+      border-bottom: 2px solid var(--theme-color);
     }
 
     .left-panel {
-      left: -300px;
-      border-right: 2px solid #FFA500;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 300px;
+      height: 100vh;
+      background: var(--bg-color);
+      border-right: 1px solid var(--border-color);
+      z-index: 1000;
+      transform: translateX(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    .left-panel.visible {
+      transform: translateX(0);
+    }
+
+    .left-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px;
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .left-panel-title {
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .left-panel-content {
+      padding: 12px;
+      height: calc(100vh - 48px);
+      overflow-y: auto;
     }
 
     .right-panel {
-      right: -300px;
-      border-left: 2px solid #FFA500;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 300px;
+      max-height: 400px;
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      z-index: 1000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      overflow: hidden;
+    }
+
+    .right-panel.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .right-panel.collapsed {
+      height: 40px;
+    }
+
+    .right-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .right-panel-title {
+      font-weight: 500;
+      font-size: 14px;
+    }
+
+    .right-panel-content {
+      padding: 12px;
+      max-height: calc(400px - 40px);
+      overflow-y: auto;
     }
 
     .custom-ui-panel.panel-visible {
@@ -58,7 +153,7 @@ export function injectStyles() {
 
     .action-btn {
       padding: 8px 16px;
-      background: #FFA500;
+      background: var(--primary-color);
       color: white;
       border: none;
       border-radius: 4px;
@@ -69,9 +164,8 @@ export function injectStyles() {
     }
 
     .action-btn:hover {
-      background: #FF8C00;
-      transform: translateY(-2px);
-      box-shadow: 0 2px 8px rgba(255, 165, 0, 0.3);
+      opacity: 0.9;
+      transform: translateY(-1px);
     }
 
     /* Dock Panel Styles */
@@ -80,13 +174,13 @@ export function injectStyles() {
       bottom: 20px;
       left: 50%;
       transform: translateX(-50%);
-      background: #ffffff;
+      background: var(--bg-color);
       padding: 10px 20px;
       border-radius: 15px;
       display: flex;
       gap: 15px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-      border: 2px solid #FFA500;
+      box-shadow: 0 4px 15px var(--shadow-color);
+      border: 2px solid var(--theme-color);
       z-index: 1002;
     }
 
@@ -100,8 +194,8 @@ export function injectStyles() {
     }
 
     .dock-item:hover {
-      background: #FFA500;
-      transform: translateY(-5px);
+      background: var(--hover-color);
+      transform: translateY(-2px);
     }
 
     .dock-icon {
@@ -111,7 +205,7 @@ export function injectStyles() {
       display: flex;
       align-items: center;
       justify-content: center;
-      color: #FFA500;
+      color: var(--theme-color);
     }
 
     .dock-item:hover .dock-icon {
@@ -123,7 +217,7 @@ export function injectStyles() {
       bottom: 100%;
       left: 50%;
       transform: translateX(-50%);
-      background: #FFA500;
+      background: var(--theme-color);
       color: white;
       padding: 5px 10px;
       border-radius: 4px;
@@ -143,7 +237,7 @@ export function injectStyles() {
       transform: translateX(-50%);
       border-width: 5px;
       border-style: solid;
-      border-color: #FFA500 transparent transparent transparent;
+      border-color: var(--theme-color) transparent transparent transparent;
     }
 
     .dock-item:hover .dock-tooltip {
@@ -151,6 +245,264 @@ export function injectStyles() {
       visibility: visible;
       transform: translateX(-50%) translateY(-5px);
     }
+
+    /* Settings Modal Styles */
+    .settings-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2000;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .settings-modal.visible {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .settings-content {
+      background: var(--bg-color);
+      border-radius: 8px;
+      width: 90%;
+      max-width: 400px;
+      box-shadow: 0 4px 12px var(--shadow-color);
+    }
+
+    .settings-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .settings-header h3 {
+      margin: 0;
+      font-size: 18px;
+      color: var(--text-color);
+    }
+
+    .settings-body {
+      padding: 16px;
+    }
+
+    .settings-section {
+      margin-bottom: 20px;
+    }
+
+    .settings-section:last-child {
+      margin-bottom: 0;
+    }
+
+    .settings-section label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--text-color);
+      font-weight: 500;
+    }
+
+    .mode-options {
+      display: flex;
+      gap: 8px;
+    }
+
+    .mode-btn {
+      flex: 1;
+      padding: 8px 16px;
+      border: 1px solid var(--border-color);
+      border-radius: 4px;
+      background: var(--bg-color);
+      color: var(--text-color);
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .mode-btn:hover {
+      background: var(--hover-color);
+    }
+
+    .mode-btn.active {
+      background: var(--primary-color);
+      color: white;
+      border-color: var(--primary-color);
+    }
+
+    .color-options {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+      gap: 8px;
+    }
+
+    .color-button {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      border: 2px solid var(--border-color);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: bold;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+    }
+
+    .color-button:hover {
+      transform: scale(1.1);
+      box-shadow: 0 2px 4px var(--shadow-color);
+    }
+
+    .color-button.active {
+      border-color: var(--text-color);
+      box-shadow: 0 0 0 2px var(--primary-color);
+    }
+
+    .color-button[data-color="yellow"] {
+      color: black;
+    }
+
+    /* Panel close button styles */
+    .panel-close-btn {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.1);
+      border: none;
+      color: var(--text-color);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 16px;
+      line-height: 1;
+    }
+
+    .panel-close-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.1);
+    }
+
+    .right-panel .panel-close-btn {
+      color: white;
+    }
+
+    /* Common button styles */
+    button {
+      background: var(--bg-color);
+      color: var(--text-color);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      padding: 8px 16px;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    button:hover {
+      background: var(--hover-color);
+      border-color: var(--primary-color);
+    }
+
+    button:active {
+      transform: translateY(1px);
+    }
+
+    /* Action log styles */
+    .action-log {
+      padding: 12px;
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 6px;
+      margin-top: 12px;
+      max-height: 300px;
+      overflow-y: auto;
+    }
+
+    .action-log-item {
+      padding: 8px;
+      border-bottom: 1px solid var(--border-color);
+      font-size: 14px;
+    }
+
+    .action-log-item:last-child {
+      border-bottom: none;
+    }
   `;
+
+  // Top panel styles
+  const topPanelStyles = `
+    .top-panel {
+      position: fixed;
+      top: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--bg-color);
+      border: 1px solid var(--border-color);
+      border-radius: 8px;
+      z-index: 2000;
+      padding: 8px;
+      box-shadow: 0 2px 8px var(--shadow-color);
+      margin-top: 8px;
+    }
+
+    .top-panel-content {
+      display: flex;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .top-panel-link {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-decoration: none;
+      color: var(--text-color);
+      padding: 4px;
+      border-radius: 4px;
+      transition: all 0.2s ease;
+    }
+
+    .top-panel-link:hover {
+      background: var(--hover-color);
+      transform: translateY(-1px);
+    }
+
+    .top-panel-icon {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+
+    /* Adjust other panels to account for top panel */
+    .left-panel {
+      top: 64px;
+      height: calc(100vh - 64px);
+    }
+
+    .right-panel {
+      top: 64px;
+    }
+  `;
+
+  // Combine all styles
+  const styles = `
+    ${baseStyles}
+    ${topPanelStyles}
+  `;
+
+  // Create and inject styles
+  const style = document.createElement("style");
+  style.textContent = styles;
   document.head.appendChild(style);
 }

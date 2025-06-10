@@ -1,6 +1,8 @@
 import { createLeftPanel } from "./ui/leftPanel";
 import { createRightPanel, setupDiffToggle } from "./ui/rightPanel";
 import { createDockPanel } from "./ui/dockPanel";
+import { createSettingsModal } from "./ui/settingsModal";
+import { createTopPanel } from "./ui/topPanel";
 import { injectStyles } from "./styles/main.css";
 import { logAction } from "./core/logger";
 
@@ -12,9 +14,11 @@ import { logAction } from "./core/logger";
   function init() {
     console.log("Initializing GitHub Extension...");
     injectStyles();
+    createTopPanel();
     createLeftPanel();
     createRightPanel();
     createDockPanel();
+    createSettingsModal();
     setupDiffToggle(logAction);
   }
 
