@@ -1,5 +1,10 @@
 import { createLeftPanel } from "./ui/leftPanel";
-import { createRightPanel, setupDiffToggle } from "./ui/rightPanel";
+import {
+  createRightPanel,
+  setupDiffToggle,
+  setupViewAllToggle,
+  setupCommentsToggle,
+} from "./ui/rightPanel";
 import { createDockPanel } from "./ui/dockPanel";
 import { createSettingsModal } from "./ui/settingsModal";
 import { createTopPanel } from "./ui/topPanel";
@@ -20,6 +25,8 @@ import { logAction } from "./core/logger";
     createDockPanel();
     createSettingsModal();
     setupDiffToggle(logAction);
+    setupViewAllToggle(logAction);
+    setupCommentsToggle(logAction);
   }
 
   // Run initialization

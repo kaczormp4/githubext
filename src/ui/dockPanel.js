@@ -13,14 +13,14 @@ export function createDockPanel() {
       action: showLeftPanel,
     },
     {
-      icon: "🛠️",
-      tooltip: "Tools",
-      action: showRightPanel,
-    },
-    {
       icon: "⚙️",
       tooltip: "Settings",
       action: showSettingsModal,
+    },
+    {
+      icon: "🛠️",
+      tooltip: "Tools",
+      action: showRightPanel,
     },
   ];
 
