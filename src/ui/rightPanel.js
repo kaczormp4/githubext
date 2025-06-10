@@ -8,14 +8,6 @@ export function createRightPanel() {
     <button class="action-btn" id="toggle-diffs">Expand All</button>
   `;
   document.body.appendChild(panel);
-
-  const toggleBtn = document.createElement("div");
-  toggleBtn.className = "toggle-btn toggle-right";
-  toggleBtn.textContent = "≡ Tools";
-  toggleBtn.onclick = () => {
-    panel.classList.toggle("panel-visible");
-  };
-  document.body.appendChild(toggleBtn);
 }
 
 export function setupDiffToggle(logFn) {
