@@ -13,8 +13,6 @@ import { logAction } from "./core/logger";
 
 // Auto-execute when imported
 (function () {
-  "use strict";
-
   // Initialize the extension
   function init() {
     console.log("Initializing GitHub Extension...");
