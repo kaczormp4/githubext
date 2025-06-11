@@ -56,11 +56,14 @@ export function injectStyles() {
       left: 0;
       width: 300px;
       height: 100vh;
-      background: var(--bg-color);
-      border-right: 1px solid var(--border-color);
       z-index: 1000;
       transform: translateX(-100%);
       transition: transform 0.3s ease;
+      background: var(--bg-color);
+      border: 2px solid var(--primary-color);
+      border-left:0px;
+      border-top-right-radius: 140px 20px;
+      border-bottom-right-radius: 120px 40px;
     }
 
     .left-panel.visible {
@@ -72,8 +75,8 @@ export function injectStyles() {
       justify-content: space-between;
       align-items: center;
       padding: 12px;
-      background: var(--primary-color);
-      color: white;
+      border-bottom: 2px solid var(--primary-color);
+      color: var(--primary-color);
     }
 
     .left-panel-title {
@@ -94,14 +97,18 @@ export function injectStyles() {
       width: 300px;
       max-height: 400px;
       background: var(--bg-color);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
       box-shadow: 0 2px 8px var(--shadow-color);
       z-index: 1000;
       opacity: 0;
       visibility: hidden;
       transition: all 0.3s ease;
       overflow: hidden;
+      transition: transform 0.3s ease;
+      background: var(--bg-color);
+      border: 2px solid var(--primary-color);
+      border-right:0px;
+      border-top-left-radius: 140px 20px;
+      border-bottom-left-radius: 120px 40px;
     }
 
     .right-panel.visible {
@@ -118,8 +125,8 @@ export function injectStyles() {
       justify-content: space-between;
       align-items: center;
       padding: 8px 12px;
-      background: var(--primary-color);
-      color: white;
+      border-bottom: 2px solid var(--primary-color);
+      color: var(--primary-color);
     }
 
     .right-panel-title {
@@ -453,6 +460,7 @@ export function injectStyles() {
       top: 0;
       left: 50%;
       transform: translateX(-50%);
+      background: var(--bg-color);
       border: 2px solid var(--primary-color);
       border-top:0px;
       border-bottom-left-radius: 60px 80px;

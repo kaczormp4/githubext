@@ -48,7 +48,6 @@ export function createRightPanel() {
   panel.style.fontFamily = "sans-serif";
   panel.style.width = "300px";
   panel.style.height = "auto";
-  panel.style.borderLeft = "2px solid orange";
 
   // Determine initial state for Expand/Collapse All
   let initialLabel = "Expand All";
