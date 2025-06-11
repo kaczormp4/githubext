@@ -171,17 +171,23 @@ export function injectStyles() {
     /* Dock Panel Styles */
     .dock-panel {
       position: fixed;
-      bottom: 20px;
+      bottom: 0px;
       left: 50%;
       transform: translateX(-50%);
       background: var(--bg-color);
       padding: 10px 20px;
-      border-radius: 15px;
       display: flex;
       gap: 15px;
       box-shadow: 0 4px 15px var(--shadow-color);
-      border: 2px solid var(--theme-color);
+
       z-index: 1002;
+      border: 2px solid var(--primary-color); 
+      border-bottom:0px;
+      border-top-left-radius: 60px 80px;
+      border-top-right-radius: 120px 40px;
+      z-index: 2000;
+      padding: 8px 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     .dock-item {
@@ -447,19 +453,22 @@ export function injectStyles() {
       top: 0;
       left: 50%;
       transform: translateX(-50%);
-      background: var(--bg-color);
-      border: 1px solid var(--border-color);
-      border-radius: 8px;
+      border: 2px solid var(--primary-color);
+      border-top:0px;
+      border-bottom-left-radius: 60px 80px;
+      border-bottom-right-radius: 120px 40px;
       z-index: 2000;
-      padding: 8px;
-      box-shadow: 0 2px 8px var(--shadow-color);
-      margin-top: 8px;
+      padding: 8px 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
     }
 
     .top-panel-content {
       display: flex;
       gap: 16px;
       align-items: center;
+      justify-content: center;
+      height: 100%;
+      color: white;
     }
 
     .top-panel-link {

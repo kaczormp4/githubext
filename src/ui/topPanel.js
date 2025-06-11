@@ -8,7 +8,7 @@ export function createTopPanel() {
         <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub" class="top-panel-icon">
       </a>
       <a href="https://www.linkedin.com/in/herobart/" target="_blank" class="top-panel-link" title="LinkedIn Profile">
-        LI
+        <img src="src/assets/images/linkedin-svgrepo-com.svg" alt="LinkedIn" class="top-panel-icon">
       </a>
     </div>
   `;
